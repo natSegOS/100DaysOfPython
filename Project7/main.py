@@ -1,110 +1,13 @@
+import art
 import random
+import words
 
 
-separator = "." * 30
-
-win_message = r'''
-      ___           ___           ___                    ___                       ___     
-     |\__\         /\  \         /\__\                  /\__\          ___        /\__\    
-     |:|  |       /::\  \       /:/  /                 /:/ _/_        /\  \      /::|  |   
-     |:|  |      /:/\:\  \     /:/  /                 /:/ /\__\       \:\  \    /:|:|  |   
-     |:|__|__   /:/  \:\  \   /:/  /  ___            /:/ /:/ _/_      /::\__\  /:/|:|  |__ 
-     /::::\__\ /:/__/ \:\__\ /:/__/  /\__\          /:/_/:/ /\__\  __/:/\/__/ /:/ |:| /\__\
-    /:/~~/~    \:\  \ /:/  / \:\  \ /:/  /          \:\/:/ /:/  / /\/:/  /    \/__|:|/:/  /
-   /:/  /       \:\  /:/  /   \:\  /:/  /            \::/_/:/  /  \::/__/         |:/:/  / 
-   \/__/         \:\/:/  /     \:\/:/  /              \:\/:/  /    \:\__\         |::/  /  
-                  \::/  /       \::/  /                \::/  /      \/__/         /:/  /   
-                   \/__/         \/__/                  \/__/                     \/__/
-'''
-
-lose_message = r'''
-                                                                     .-')      ('-.   
-                                                                    ( OO ).  _(  OO)  
-  ,--.   ,--..-'),-----.  ,--. ,--.          ,--.      .-'),-----. (_)---\_)(,------. 
-   \  `.'  /( OO'  .-.  ' |  | |  |          |  |.-') ( OO'  .-.  '/    _ |  |  .---' 
- .-')     / /   |  | |  | |  | | .-')        |  | OO )/   |  | |  |\  :` `.  |  |     
-(OO  \   /  \_) |  |\|  | |  |_|( OO )       |  |`-' |\_) |  |\|  | '..`''.)(|  '--.  
- |   /  /\_   \ |  | |  | |  | | `-' /      (|  '---.'  \ |  | |  |.-._)   \ |  .--'  
- `-./  /.__)   `'  '-'  '('  '-'(_.-'        |      |    `'  '-'  '\       / |  `---. 
-   `--'          `-----'   `-----'           `------'      `-----'  `-----'  `------'
-'''
-
-stage_0 = r'''
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========
-'''
-
-stage_1 = r'''
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========
-'''
-
-stage_2 = r'''
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========
-'''
-
-stage_3 = r'''
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========
-'''
-
-stage_4 = r'''
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========
-'''
-
-stage_5 = r'''
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-=========
-'''
-
-stage_6 = r'''
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-=========
-'''
-
-stages = [stage_0, stage_1, stage_2, stage_3, stage_4, stage_5, stage_6]
-num_stages = len(stages)
+num_stages = len(art.stages)
 
 
 def display_progress(progress):
-    print(stages[num_stages - progress[1] - 1], "\n")
+    print(art.stages[num_stages - progress[1] - 1], "\n")
     print("".join(progress[0]), "\n")
 
 
@@ -118,7 +21,7 @@ def get_guess(progress):
 
     if len(guess) != 1:
         print("\nYou can only guess a single letter at a time! Try again.")
-        print(separator)
+        print(art.separator)
         return get_guess()
 
     return guess
@@ -136,14 +39,12 @@ def update_progress(progress, word, guess):
         print(f"\nOops! Looks like '{guess}' isn't in the word.")
         progress[1] -= 1
 
-    print(separator)
+    print(art.separator)
     return progress
 
 
 def main():
-    word_list = ["aardvark", "baboon", "camel"]
-
-    word = random.choice(word_list)
+    word = random.choice(words.word_list)
     num_letters = len(word)
 
     progress = [["_"] * num_letters, num_stages - 1]
@@ -162,9 +63,9 @@ def main():
             is_game_over = True
 
     if did_win:
-        print(win_message)
+        print(art.win_message)
     else:
-        print(lose_message)
+        print(art.lose_message)
 
     display_progress(progress)
 
